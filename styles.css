@@ -175,4 +175,22 @@ img {
 }
 
 /* --------- GRID IMPLÍCITA --------- */
+.grid-implicit {
+  display: grid;
+
+  /* Grid de 4 columnas x 3 filas (con esto podría tener hasta 12 celdas, es el cálculo en el que hay que pensar siempre) */
+  /* Como tengo 19 items, desde el 13 al 19 ya no estarían dentro de la cuadrícula */
+  /* Es en estos casos donde nos ayuda la grid implícita */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 200px);
+
+  /* En este caso, la grid EXPLÍCITA sería la retícula de 4 x 3 (osea, desde el item 1 al 12)
+  entonces los elementos posteriores se considerarían de la grid IMPLÍCITA */
+
+  display: inline-grid; /* El modelo grid se aplicará pero como inline, haciendo que el contenedor ocupará solo el ancho necesario en la página y no toda */  
+  /* Por ejemplo, si tenemos dos bloques con display inline-grid y hay espacio suficiente, los bloques compartirán espacio */
+  /* Esto anterior funcionaría si damos a cada bloque un width de 40% por ejemplo. De esta manera cabrían en el espacio y lo compartirían */  
+}
+
+/* --------- FLUJO DE LA GRID --------- */
 
