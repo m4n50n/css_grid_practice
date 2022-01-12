@@ -184,7 +184,7 @@ img {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 200px);
 
-  /* En este caso, la grid EXPLÍCITA sería la retícula de 4 x 3 (osea, desde el item 1 al 12)
+  /* IMPORTANTE!!! En este caso, la grid EXPLÍCITA sería la retícula de 4 x 3 (osea, desde el item 1 al 12)
   entonces los elementos posteriores se considerarían de la grid IMPLÍCITA */
 
   display: inline-grid; /* El modelo grid se aplicará pero como inline, haciendo que el contenedor ocupará solo el ancho necesario en la página y no toda */  
@@ -193,4 +193,26 @@ img {
 }
 
 /* --------- FLUJO DE LA GRID --------- */
+.grid-flow {
+  display: grid;
 
+  /* Grid de 5 columnas x 3 filas */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 150px);
+
+  /* Determinar el flujo que va a seguir la cuadrícula */
+  grid-auto-flow: column; /* Los elementos se acomodan en columnas */
+  grid-auto-flow: row; /* Los elementos se acomodan en filas */
+  /* Estas propiedades anteriores funcionan igual que en flexbox. Si el flujo es column en lugar de ser 5x3 sería 3x5 */
+
+  /* La siguiente propiedad indica a los elementos el tamaño que deben tomar:
+  Para los elementos que estén dentro de la grid explícita, tomará el tamaño indicado
+  Para el resto, será automático y dependerá de su contenido */
+  grid-auto-rows: auto; /* El valor por defecto es auto */
+  grid-auto-rows: 100px; /* Todas las filas que se generen IMPLÍCITAMENTE tendrán 100px de altura */
+
+  /* La siguiente propiedad funciona igual que la anterior pero con las columnas */
+  grid-auto-flow: column; /* Los elementos se acomodan en columnas */
+  grid-auto-columns: auto; /* Valor por defecto */
+  grid-auto-columns: 50px;
+}
