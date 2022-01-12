@@ -1,0 +1,178 @@
+/* - CSS GENERAL - */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+a[href="#top"] {
+  margin: 1rem;
+  display: block;
+  font-size: 2rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 50vh;
+  text-align: center;
+}
+
+img {
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.menu {
+  margin-bottom: 100vh;
+  font-size: 125%;
+}
+
+.menu li {
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin: 0 auto;
+  width: 80%;
+  height: 80vh;
+  background-color: #222;
+  border: medium solid #000;
+}
+
+.item {
+  padding: 1rem;
+  font-size: 1.25rem;
+  background-color: #666;
+  border: medium solid #999;
+}
+
+/* --------- GRID EXPLÍCITO --------- */
+/* 
+  Con grid-template-columns definimos el número de columnas y sus anchos
+  Con grid-template-rows definimos el número de filas y sus altos
+ */
+.grid-explicit {
+  display: grid;
+
+  /* Grid de 3 col x 3 filas */
+  grid-template-columns: 50% 100px 1fr; /* Definir filas; 1fr (fracción) se define como el espacio sobrante */
+  grid-template-rows: 2rem 20vh 30%; /* Definir el número de columnas */
+
+  /* Con lo anterior, la primera fila (Grid de 1 a 3 - porque hay 3 columnas-) tiene 2rem de altura. La segunda (Grid de 4 a 6) tiene 20vh y la tercera (Grid de 7 a 9) tiene 30% */
+  /* El resto de filas no se han definido, así que su altura se rige por el tamaño del contenido de los propios contenedores */
+
+  /* Grid de 5 col x 4 filas */
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(4, auto); /* Aquí tenemos 4 filas y su altura depende de su contenido */
+  grid-template-rows: repeat(4, 25%); /* Aquí tenemos 4 filas iguales sin importar el contenido de las mismas */
+
+  /* Grid de 4 col x 5 filas */
+  grid-template-columns: 20% repeat(2, 30%) 20%; /* Repeat() solo funciona con elementos contiguos */
+  grid-template-rows: repeat(5, auto);
+
+  gap: 1vh 1vw; /* Distancia entre filas y distancia entre columnas */
+  gap: 0;
+}
+
+/* ITEMS (HIJOS). POSICIONAMIENTO CON GRID LINES: los elementos se acomodan según las coordenadas */
+/* Las líneas horizontales son relativas a las filas, y las verticales a las columnas */
+.grid-explicit .item:nth-child(10) {
+  color: cyan;
+
+  /* De qué línea a qué linea ocupará la fila */
+  grid-row-start: 2; 
+  grid-row-end: 3;
+
+  /* De qué linea a qué linea ocupará la columna */
+  grid-column-start: 3;
+  grid-column-end: 2;
+
+  grid-row: 2 / 3; /* Shortcut: row-start/row-end */
+  grid-column: 3 / 5; /* Shortcut: column-start/column-end. En este ejemplo, el elemento ocuparía dos espacios (como un combinar celdas en Excel) */
+
+  grid-area: 2 / 3 / 3 / 5; /* Shorcut de grid-row y grid-column (grid-row-start / grid-row-end / grid-column-start / grid-column-end). OJO! esto no funciona cuando se le da nombre a las líneas */
+}
+
+/* Decir al elemento que ocupe varios espacios dependiendo de la posición donde se encuentre */
+.grid-explicit .item:nth-child(12) {
+  color: cyan;
+
+  /* Ocupar 2 celdas en fila y 3 en columnas */
+  grid-row: span 2; 
+  grid-column: span 3;
+}
+
+.grid-explicit .item:nth-child(15) {
+  color: cyan;
+
+  grid-row: 1 / span 2; /* Empezar en la línea 1 y a partir de ahí desplazarse 3 filas hacia abajo */
+  grid-column: 1 / span 2; /* Empezar en la línea 1 y desplazarse 3 elementos */
+}
+
+/* --------- GRID CON NOMBRES DE LÍNEA --------- */
+.grid-line-names {
+  display: grid;
+  /* Grid de 3 columnas x 3 filas (esto quiere decir que tendrá 4 lineas de columna por 4 líneas de fila) */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+
+  /* Esto de aquí abajo es lo mismo que lo de arriba pero poniendo nombres a las líneas */
+  grid-template-columns: [linea-c1] 1fr [linea-c2] 1fr [linea-c3] 1fr [linea-c4]; /* Ejemplo: [] 1fr [] 1fr [] 1fr [] - Los corchetes son las líneas que hay */
+  grid-template-rows: [linea-r1] 1fr [linea-r2] 1fr [linea-r3] 1fr [linea-r4];
+  grid-template-rows: [linea-r1] auto [linea-r2] auto [linea-r3] auto [linea-r4]; /* El valor automático está definido por la altura de contenido que tengan. Con esto todas las filas tendrán la misma altura */
+}
+
+.grid-line-names .item:nth-child(3) {
+  color: cyan;
+
+  grid-row: linea-r3 / linea-r4;
+  grid-column: linea-c1 / linea-c4;
+}
+
+/* --------- GRID CON ÁREAS --------- */
+.grid-areas {
+  display: grid;
+
+  /* Grid de 2 columnas x 3 filas */
+  grid-template-columns: 1fr 200px;
+  grid-template-rows: 100px repeat(2, 1fr) 50px;
+
+  grid-template-areas: /* Definir nombres de las áreas */
+    "header header"
+    "content sidebar"
+    "content ." /* Al poner punto hacemos que deje la celda vacia */
+    "footer footer";
+}
+
+.header {
+  grid-area: header; /* Aqui apuntamos al nombre del área definida en el padre (sin comillas) */
+}
+
+.content {
+  grid-area: content;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+/* --------- GRID IMPLÍCITA --------- */
+
