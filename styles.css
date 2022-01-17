@@ -215,4 +215,35 @@ img {
   grid-auto-flow: column; /* Los elementos se acomodan en columnas */
   grid-auto-columns: auto; /* Valor por defecto */
   grid-auto-columns: 50px;
+
+  /* NOTAS:
+  - Cuando tenemos grid-auto-flow: row, la fila respetará explícitamente el número de columnas que le hemos dado, y si a partir de eso los elementos no caben, se generará dinámicamente lo que se conoce como grid implícita 
+  - Cuando tenemos grid-auto-flow: column, se respestará el número de filas que le hayamos dicho explícitamente y dinámicamente irá generando las columnas dependiendo el número de celdas (items) que tenga la grid */
 }
+
+/* --------- FLUJO DENSO DE LA GRID (aprovechar huecos vacíos) --------- */
+.grid-flow-dense {
+  display: grid;
+
+  /* grid de 5columnas x 4 filas */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 200px);
+  
+  grid-auto-flow: row dense; /* sólo con row no abría cambio, pero con dense, los elementos que estaban vacios serán ocupados por los elementos que están inmediatamente después en caso de que quepan */
+  grid-auto-flow: column dense;
+
+  /* NOTA
+  - Cuando el flujo está en fila, grid css genera tantas filas explícitamente como requiera y va a respetar el numero de columnas
+  - Cuando el flujo está en columna, respetará explícitamente el número de filas y generará tantas columnas como se requiera */
+}
+
+.grid-flow-dense .item:nth-child(9) { /* queremos que este elemento ocupe 3 columnas y 3 celdas a partir de donde está */
+  color: cyan;
+
+  /* La siguiente forma de hacerlo no serviría porque lo que queremos es que parta desde su posición, y con esto se situaría según el tamaño que tuviera después del span */
+  /* Como la grid explícita no podría generar una 6 columna, el elemento ya no cabría y lo llevaría a la siguiente fila */
+  grid-row: span 3;
+  grid-column: span 3;
+}
+
+/* --------- GRID ITEMS EN CAPAS (SUPERPOSICIÓN) --------- */
