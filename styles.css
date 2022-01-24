@@ -12,6 +12,10 @@ html {
   box-sizing: inherit;
 }
 
+.item { /* debug */
+  border: 1px solid red !important;
+}
+
 a[href="#top"] {
   margin: 1rem;
   display: block;
@@ -304,3 +308,50 @@ img {
 .grid-order .item:nth-child(5) {
   order: -1;
 }
+
+/* --------- ALINEAMIENTO DE GRID ITEMS --------- */
+.grid-align {
+  display: grid;
+
+  /* Grid explícita de 3 columnas por 2 filas */
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 200px);
+  justify-items: center; /* Esta propiedad trabaja sobre el eje X */
+  align-items: center; /* Esta propiedad trabaja sobre el eje Y */
+}
+
+.grid-align .item:nth-child(4) {
+  justify-self: end; /* Posicionar sólamente este elemento */
+  align-self: start;
+}
+
+/* --------- ALINEAMIENTO DE GRID TRACKS --------- */
+.grid-align-tracks {
+  display: grid;
+
+  /* Grid explícita de 3 columnas por 2 filas */
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 200px);
+
+  /* Utilizaremos justify-content y align-content para alinear en X o Y la fila / columna completa */
+  justify-content: space-evenly;
+  align-content: space-evenly;
+}
+
+/* --------- TAMAÑOS MÁXIMOS Y MÍNIMOS DE GRID TRACKS --------- */
+.grid-min-max {
+  display: grid;
+
+  /* Grid de 4 columnas por x filas (como por ejemplo en instagram o pinterest, en los que se van cargando nuevas filas al hacer scroll) */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(100px, 200px)); /* minmax(tamaño mínimo, tamaño máximo de cada columna) */
+  grid-template-columns: repeat(4, minmax(min-content, 200px)); /* Con min-content el tamaño mínimo será el tamaño del contenido */
+  grid-template-columns: repeat(4, minmax(100px, min-content)); /* Lo mismo que el ejemplo anterior pero a la inversa */
+  grid-template-columns: repeat(4, minmax(100px, max-content)); /* Lo mismo pero ocupando el tamaño máximo */
+  grid-template-columns: repeat(4, minmax(min-content, max-content));
+
+  /* Para entender min-content y max-content podemos pensar en el texto de los items del tipo "GRID ITEM 1"
+  El contenido máximo será todo el texto junto a los espacios, sin salto de línea
+  El contenido mínimo sería grid - salto de línea - item - salto de línea - 1 */
+}
+
