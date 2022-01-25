@@ -355,3 +355,41 @@ img {
   El contenido mínimo sería grid - salto de línea - item - salto de línea - 1 */
 }
 
+/* --------- GRID CON PATRONES REPETITIVOS --------- */
+.grid-repeat {
+  display: grid;
+
+  /* Grid de 4 por x colums */
+  grid-template-columns: repeat(1, 10% 20% 30% 40%); 
+  /* La propiedad anterior repetirá solamente 1 vez ese patrón, por lo que cada fila tendrá las mismas columnas */
+  /* Con esto podría hacerse algo del estilo Instagram */
+}
+
+/* --------- GRIDS DINÁMICAS --------- */
+.grid-dynamics {
+  display: grid;
+
+  /* Sólo definiremos 4 columnas y dejaremos que grid defina las filas */
+  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(auto-fill, 100px); /* Auto-fill rellena la grid con tracks generados dinámicamente */
+  grid-template-columns: repeat(auto-fit, 100px); /* Ajusta la grid con los tracks existentes (esto es como un flex-grow!!!) */
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Con esto podemos hacer responsive las columnas */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Aquí ya estaría funcionando el minmax, donde el máximo será 100px más el espacio sobrante dividido entre cada uno de los elementos. Con esto lo haremos responsive */
+}
+
+/* --------- RESPONSIVE SIN MEDIA QUERIES --------- */
+.grid-responsive {
+  display: grid;
+
+  /* Con 280px simulamos una resolución mínima de 200px, por ejempo */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* A los elementos que tiene disponibles, por lo tanto la cuadrícula dinámica se formará según el número de elementos */
+  /* Con auto-fit le decimos que se repetirán tantas columnas como se necesite */
+  /* Con la propiedad anterior la columna se adaptará a medida que el contenedor vaya teniendo más o menos espacio */
+
+  gap: 1vw 1vw; /* Podemos agregar separación entre elementos */
+}
+
+/* --------- GRIDS ANIDADOS --------- */
+.grid_nested {
+  display: grid; 
+}
