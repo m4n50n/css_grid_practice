@@ -64,6 +64,12 @@ img {
   border: medium solid #999;
 }
 
+.sub-item {
+  padding: 1rem;
+  border: medium solid #ccc;
+  background-color: #DDD;
+}
+
 /* --------- GRID EXPLÍCITO --------- */
 /* 
   Con grid-template-columns definimos el número de columnas y sus anchos
@@ -390,6 +396,9 @@ img {
 }
 
 /* --------- GRIDS ANIDADOS --------- */
-.grid_nested {
-  display: grid; 
+.grid-nested {
+  display: grid;
+
+  /* 3 columnas y x filas (se generarán automáticamente) */
+  grid-template-columns: repeat(3, 1fr);
 }

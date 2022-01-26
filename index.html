@@ -34,7 +34,6 @@
       <li><a href="#grid-dynamics">Grids Dinámicas</a></li>
       <li><a href="#grid-responsive">Responsive sin Media Queries</a></li>
       <li><a href="#grid-nested">Grids Anidados</a></li>
-      <li><a href="#subgrid">Subgrids</a></li>
       <li><a href="grid_layout.html">Grid Layout con Líneas</a></li>
       <li><a href="grid_layout_areas.html">Grid Layout con Áreas</a></li>
     </ul>
@@ -602,10 +601,18 @@
     <!-- Grids Anidados -->
     <h2 id="grid-nested">Grids Anidados</h2>
     <a href="#top">🔝</a>
-    <section class="container grid-nested"></section>
-
-    <h2 id="subgrid">Subgrids</h2>
-    <a href="#top">🔝</a>
-    <section class="container grid"></section>
+    <section class="container grid-nested">
+        <article class="item grid-nested">
+            <div class="sub-item">Grid Subitem 1</div>
+            <div class="sub-item">Grid Subitem 2</div>
+            <div class="sub-item">Grid Subitem 3</div>
+            <div class="sub-item">Grid Subitem 4</div>
+            <div class="sub-item">Grid Subitem 5</div>
+        </article>
+        <article class="item">Grid Item 2</article>
+        <article class="item">Grid Item 3</article>
+        <article class="item">Grid Item 4</article>
+        <article class="item">Grid Item 5</article>
+    </section>
   </body>
 </html>
